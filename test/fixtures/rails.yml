@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  g: MyString
+  controller: MyString
+  Authors: MyString
+  new: MyString
+
+two:
+  g: MyString
+  controller: MyString
+  Authors: MyString
+  new: MyString

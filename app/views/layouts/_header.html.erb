@@ -16,7 +16,14 @@
           <a class="nav-link" href="<%= about_path%>">Contact</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Login</a>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              Login <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+              <li><%= link_to "SignUp" %></li>
+            </ul>
+          </li>
         </li>
       </ul>
     </div>
