@@ -11,12 +11,12 @@ class AuthorsController < ApplicationController
   def create
     @author  = Author.new author_params
     if author.save
-      flash[:success] = "Welcome to the Sample App!"
+      flash[:success] = "Sign up success!"
       redirect_to author
     else
       render :new
     end
-    
+
   end
 
   private
