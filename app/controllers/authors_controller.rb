@@ -1,12 +1,17 @@
 class AuthorsController < ApplicationController
- 
+  before_action :find_author, only: [:edit, :update, :show]
+  before_action :logged_in_author, only: [:edit, :update]
+  before_action :correct_author, only: [:edit, :update]
+  before_action :admin?, only: :destory
+  def index
+    @author = Author.paginate(page: params[:page])
+  end
+
   def new
     @author = Author.new
   end
 
-  def show
-    @author = Author.find_by(id: params[:id])
-  end
+  def show; end
 
   def create
     @author  = Author.new author_params
@@ -19,10 +24,51 @@ class AuthorsController < ApplicationController
 
   end
 
+  def edit; end
+
+  def update
+    if author.update_attributes author_params
+      flash[:success] = "Update Complete"
+      redirect_to author
+    else
+      render :edit
+    end
+  end
+
+  def destroy
+    @id = params[:id]
+    Author.find_by(id: params[:id]).destroy
+    respond_to do |format|
+      format.js
+    end
+  end
+
   private
   attr_reader :author
+
   def author_params
     params.require(:author).permit(:name, :email, :password, :password_confirmation)
+  end
+
+  def find_author
+    @author = Author.find_by(id: params[:id])
+    return if author
+    flash[:danger] = "Author error"
+    redirect_to root_path
+  end
+
+  def logged_in_author
+    return if logged_in?
+    flash[:danger] = "Please loggin before update"
+    redirect_to root_path
+  end
+
+  def correct_author
+    redirect_to root_path unless author.current_author? current_author
+  end
+
+  def admin?
+    redirect_to root_path unless current_author.admin?
   end
 
 end

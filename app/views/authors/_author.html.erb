@@ -1,0 +1,11 @@
+<li id="<%= author.id %>">
+  <%= gravatar_for author, size: 50 %>
+  <%= link_to author.name, author %>
+  
+  <% if current_author.admin? && !current_author.current_author?(author) %>
+      <%= link_to "Delete", author, method: :delete,
+        data: { confirm: "You sure?", remote: true } %>
+  <% end %>
+  
+  
+</li>

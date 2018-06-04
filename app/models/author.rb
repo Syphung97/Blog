@@ -38,6 +38,10 @@ class Author < ApplicationRecord
     update_attributes(remember_digest: nil)
   end
 
+  def current_author? current_author
+    self == current_author
+  end
+
   private
   def email_down
     self.email = email.downcase
