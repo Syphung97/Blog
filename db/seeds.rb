@@ -19,12 +19,19 @@
 #                password:              password,
 #                password_confirmation: password)
 # end
-authors = Author.order(:created_at).take(6)
-50.times do
-  title = Faker::Lorem.sentence(1)
-  content = Faker::Lorem.sentence(5)
-  catalog = "html"
-  authors.each do |user|
-     user.posts.create!(title: title, content: content, catalog: catalog)
-  end
-end
+# authors = Author.order(:created_at).take(6)
+# 50.times do
+#   title = Faker::Lorem.sentence(1)
+#   content = Faker::Lorem.sentence(5)
+#   catalog = "html"
+#   authors.each do |user|
+#      user.posts.create!(title: title, content: content, catalog: catalog)
+#   end
+# end
+
+authors = Author.all
+author  = authors.first
+following = authors[2..50]
+followers = authors[3..40]
+following.each { |followed| author.follow(followed) }
+followers.each { |follower| follower.follow(author) }

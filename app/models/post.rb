@@ -7,6 +7,9 @@ class Post < ApplicationRecord
   validates :catalog, inclusion: {in: catalogs.keys}
   mount_uploader :picture, PictureUploader
   scope :desc, ->{order created_at: :desc}
+  scope :following_feed, (lambda do |following_ids, id|
+    where "author_id IN (?) OR author_id = ?", following_ids, id
+  end)
   # Ex:- scope :active, -> {where(:active => true)}
 
 end

@@ -5,6 +5,7 @@ class StaticPagesController < ApplicationController
             @feed_items = current_author.feed.desc.paginate(page: params[:page]) 
             @catalog = Post.catalogs
         end
+        @new_feed = Post.paginate(page: params[:page]).desc
     end
     
 end

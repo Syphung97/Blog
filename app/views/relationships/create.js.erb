@@ -1,0 +1,2 @@
+$("#follow_form").html("<%= j render "authors/unfollow", author: @author, current_relation: @current_relation %>");
+$("#followers").html('<%= @author.followers.count %>');

@@ -1,11 +1,17 @@
 <% provide :title, "Home"%>
 
-<div class="col-md-4 form_post">
-  <%= render "shared/post_form", post: @post, catalog: @catalog %>
-</div>
+
+<% if logged_in? %>
+  <div class="col-md-4 form_post">
+    <%= render "shared/post_form", post: @post, catalog: @catalog %>
+  </div>
+  <div class="col-md-8">
+    <%= render "shared/feed", feed_item: @feed_items %>
+  </div>
+<% else %>
+  <div class="col-md-8">
+    <%= render "shared/feed", feed_item: @new_feed %>
+  </div>
+<% end %>
 
 
-
-<div class="col-md-8">
-  <%= render "shared/feed", feed_item: @feed_items %>
-</div>

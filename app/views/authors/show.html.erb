@@ -3,16 +3,22 @@
   <aside class="col-md-4">
     <section class="author_info">
       <%= render 'shared/author_info', author: @author %>
+      <section class="stats">
+        <%= render 'shared/stats', user: @author %>
+      </section>
     </section>
-    <ul class="list-group">
+    <%# <ul class="list-group">
       <li class="list-group-item">Cras justo odio</li>
       
-    </ul>
+    </ul> %>
   </aside>
   <div class="col-md-4">
   </div>
   
-  <div class="col-md-8"> 
+  <div class="col-md-8">
+    <%= render "follow_form", new_relation: @supports.new_relation,
+      current_relation: @supports.current_relation,
+      author: @author if logged_in? %>
     <% if @author.posts.any? %>
       <%= will_paginate @posts %>
       <ol class="microposts">

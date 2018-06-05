@@ -13,6 +13,7 @@ class AuthorsController < ApplicationController
 
   def show 
     @posts = author.posts.desc.paginate(page: params[:page], per_page: 5)
+    @supports = Supports::Author.new author: author, current_author: current_author
   end
 
   def create
