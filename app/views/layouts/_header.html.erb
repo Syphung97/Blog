@@ -27,11 +27,12 @@
             </a>
             <ul class="dropdown-menu">
               
-              <li><%= link_to "SignUp", new_author_path %></li>
               <% if !logged_in? %>
+                <li><%= link_to "SignUp", new_author_path %></li>
                 <li><%= link_to "Login", login_path %></li>
               <%end%>
               <% if logged_in? %>
+                <li><%= link_to "Profile", author_path(current_author) %></li>
                 <li><%= link_to "Setting", edit_author_path(current_author) %></li>
                 <li><%= link_to "Logout", logout_path, method: :delete %></li>
               <% end %>

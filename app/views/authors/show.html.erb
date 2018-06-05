@@ -1,11 +1,25 @@
 <% provide(:title, @author.name) %>
 <div class="row">
   <aside class="col-md-4">
-    <section class="user_info">
-      <h1>
-        <%= gravatar_for @author %>
-        <%= @author.name %>
-      </h1>
+    <section class="author_info">
+      <%= render 'shared/author_info', author: @author %>
     </section>
+    <ul class="list-group">
+      <li class="list-group-item">Cras justo odio</li>
+      
+    </ul>
   </aside>
+  <div class="col-md-4">
+  </div>
+  
+  <div class="col-md-8"> 
+    <% if @author.posts.any? %>
+      <%= will_paginate @posts %>
+      <ol class="microposts">
+        <%= render partial: "posts/post", collection: @posts %>
+      </ol>
+      <%= will_paginate @posts %>
+    <% end %>
+    
+  </div>
 </div>

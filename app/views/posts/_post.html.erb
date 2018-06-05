@@ -1,0 +1,21 @@
+<li id="<%= post.id %>">
+  <div class="post">
+    
+    <% if post.picture? %>
+      <img class="card-img-top" src="<%=post.picture.url%>" alt="Card image cap">
+    <% end %>
+    <div class="card-body">
+      <h1 ><%= post.title %></h1>
+      <p class="card-text"><%= post.content %></p>
+      <a href="#" class="btn btn-primary">Read More &rarr;</a>
+    </div>
+    <div class="card-footer text-muted">
+      Posted <%= time_ago_in_words(post.created_at) %> ago.
+      <%= link_to "Posted by #{post.author.name}", author_path(current_author)%>
+      
+      <% if post.author.current_author? current_author %>
+        <%= link_to "Delete", post, method: :delete, remote: true%>
+      <% end %>
+    </div>
+  </div>
+</li>

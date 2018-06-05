@@ -1,0 +1,14 @@
+<h2>Composer a new post</h2>
+<%= form_for post, remote: true do |f| %>
+  <%= render "shared/error_messages", object: f.object %>
+
+    <%= f.text_area :title, placeholder: "title" ,class: "form-control" %>
+  
+    <%= f.text_area :content, placeholder: "content", class: "form-control" %>
+    <%= f.label :categori %>
+    <%= f.select :catalog , catalog.keys, class: "form-control" %>
+  <span class="picture">
+    <%= f.file_field :picture %>
+  </span>
+  <%= f.submit "Post", class: "btn btn-primary" %>
+<% end %>

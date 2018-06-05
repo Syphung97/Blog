@@ -11,7 +11,9 @@ class AuthorsController < ApplicationController
     @author = Author.new
   end
 
-  def show; end
+  def show 
+    @posts = author.posts.desc.paginate(page: params[:page], per_page: 5)
+  end
 
   def create
     @author  = Author.new author_params
@@ -54,12 +56,6 @@ class AuthorsController < ApplicationController
     @author = Author.find_by(id: params[:id])
     return if author
     flash[:danger] = "Author error"
-    redirect_to root_path
-  end
-
-  def logged_in_author
-    return if logged_in?
-    flash[:danger] = "Please loggin before update"
     redirect_to root_path
   end
 

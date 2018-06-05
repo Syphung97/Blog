@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180604142656) do
+ActiveRecord::Schema.define(version: 20180605131224) do
 
   create_table "authors", force: :cascade do |t|
     t.string "name"
@@ -21,6 +21,18 @@ ActiveRecord::Schema.define(version: 20180604142656) do
     t.string "remember_digest"
     t.boolean "admin", default: false
     t.index ["email"], name: "index_authors_on_email", unique: true
+  end
+
+  create_table "posts", force: :cascade do |t|
+    t.text "title"
+    t.text "content"
+    t.integer "author_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "catalog"
+    t.string "picture"
+    t.index ["author_id", nil], name: "index_posts_on_author_id_and_create_at"
+    t.index ["author_id"], name: "index_posts_on_author_id"
   end
 
 end
