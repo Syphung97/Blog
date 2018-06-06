@@ -1,0 +1,19 @@
+<div class="card my-4">
+  <h5 class="card-header">Leave a Comment:</h5>
+  <div class="card-body">
+    <%# <form>
+      <div class="form-group">
+        <textarea class="form-control" rows="3"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form> %>
+    <%= form_for [post,new_comment], remote: true do |f| %>
+      <%= render "shared/error_messages", object: f.object %>
+        <%= f.hidden_field :author_id,:value => current_author.id %>
+      <div class="field">
+        <%= f.text_area :content, placeholder: "Enter your comment here" %>
+      </div>
+       <%= f.submit "Comment", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>

@@ -2,6 +2,7 @@ class Author < ApplicationRecord
   attr_accessor :remember_token
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   has_many :posts, dependent: :destroy
+  has_many :comments
   has_many :active_relationships, class_name: Relationship.name,
     foreign_key: :follower_id, dependent: :destroy
   has_many :passive_relationships, class_name: Relationship.name,
@@ -46,6 +47,10 @@ class Author < ApplicationRecord
 
   def current_author? current_author
     self == current_author
+  end
+
+  def not_feed
+    Post.not_following_feed(following_ids,id)
   end
 
   def feed

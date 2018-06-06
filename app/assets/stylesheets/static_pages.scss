@@ -11,7 +11,9 @@ $white-line: #bbb;
 $red: #f00;
 $blue: #00f;
 
-
+h1{
+  text-transform: capitalize;
+}
 body {
   padding-top: 60px;
   box-sizing: border-box;

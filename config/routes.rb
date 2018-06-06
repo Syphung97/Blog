@@ -13,6 +13,9 @@ Rails.application.routes.draw do
       resources :followings, :followers, only: [:index]
     end
   end
-  resources :posts
+  resources :posts do
+      resources :comments
+  end
+
   resources :relationships, only: [:create, :destroy]
 end
