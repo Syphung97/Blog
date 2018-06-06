@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180605171023) do
+ActiveRecord::Schema.define(version: 20180606073633) do
 
   create_table "authors", force: :cascade do |t|
     t.string "name"
@@ -34,6 +34,16 @@ ActiveRecord::Schema.define(version: 20180605171023) do
     t.index ["post_id"], name: "index_comments_on_post_id"
   end
 
+  create_table "likes", force: :cascade do |t|
+    t.integer "author_id"
+    t.integer "post_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["author_id", "post_id"], name: "index_likes_on_author_id_and_post_id", unique: true
+    t.index ["author_id"], name: "index_likes_on_author_id"
+    t.index ["post_id"], name: "index_likes_on_post_id"
+  end
+
   create_table "posts", force: :cascade do |t|
     t.text "title"
     t.text "content"
@@ -42,7 +52,7 @@ ActiveRecord::Schema.define(version: 20180605171023) do
     t.datetime "updated_at", null: false
     t.string "catalog"
     t.string "picture"
-    t.index ["author_id", nil], name: "index_posts_on_author_id_and_create_at"
+    t.index ["author_id", "created_at"], name: "index_posts_on_author_id_and_created_at"
     t.index ["author_id"], name: "index_posts_on_author_id"
   end
 

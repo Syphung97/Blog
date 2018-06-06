@@ -5,9 +5,9 @@ class Post < ApplicationRecord
   belongs_to :author
 
   has_many :comments
-
+  has_many :likes
   validates :author_id, presence: true
-  validates :title, presence: true, length: { maximum:50}
+  validates :title, presence: true, length: { maximum:500}
   validates :content, presence: true, length:{maximum: 500}
   validates :catalog, inclusion: {in: catalogs.keys}
 
